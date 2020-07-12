@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class NotificationsSeeder extends Seeder
+class CommentsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,15 +14,16 @@ class NotificationsSeeder extends Seeder
     {
         //
         $UserID = DB::table('users')->pluck('id');
-        $NotiID = DB::table('notification_types')->pluck('id');
-
+        $PostID = DB::table('posts')->pluck('id');
+        $CommentType = DB::table('comment_types')->pluck('id');
         $faker = Faker\Factory::create();
         {
             for($i=0; $i<2; $i++){
-                DB::table('notifications')->insert([
+                DB::table('comments')->insert([
                     'user' => $faker->randomElement($UserID),
+                    'post' => $faker->randomElement($PostID),
                     'content'=> $faker->name,
-                    'type' => $faker->randomElement($NotiID),
+                    'comment_type' => $faker->randomElement($CommentType),
                     'created_at' => new DateTime(),
                     'updated_at' => new DateTime(),
                 ]);

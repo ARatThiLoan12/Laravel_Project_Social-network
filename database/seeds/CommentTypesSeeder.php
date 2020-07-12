@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 
-class FriendsSeeder extends Seeder
+class CommentTypesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,15 +12,12 @@ class FriendsSeeder extends Seeder
      */
     public function run()
     {
-        $UserID= DB::table('users')->pluck('id');
         //
         $faker = Faker\Factory::create();
         {
             for($i=0; $i<2; $i++){
-                DB::table('friends')->insert([
-                    'user_send' => $faker->randomElement($UserID),
-                    'user_receive' => $faker->randomElement($UserID),
-                    'status' => $faker->numberBetween($max=1, $min=0),
+                DB::table('comment_types')->insert([
+                    'type'=> $faker->name,
                     'created_at' => new DateTime(),
                     'updated_at' => new DateTime(),
                 ]);

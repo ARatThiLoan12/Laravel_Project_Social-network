@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 
-class LikesSeeder extends Seeder
+class FriendsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,16 +12,15 @@ class LikesSeeder extends Seeder
      */
     public function run()
     {
+        $UserID= DB::table('users')->pluck('id');
         //
-        $UserID = DB::table('users')->pluck('id');
-        $PostID = DB::table('posts')->pluck('id');
-
         $faker = Faker\Factory::create();
         {
             for($i=0; $i<2; $i++){
-                DB::table('likes')->insert([
-                    'user' => $faker->randomElement($UserID),
-                    'post' => $faker->randomElement($PostID),
+                DB::table('friends')->insert([
+                    'user_send' => $faker->randomElement($UserID),
+                    'user_receive' => $faker->randomElement($UserID),
+                    'status' => $faker->numberBetween($max=1, $min=0),
                     'created_at' => new DateTime(),
                     'updated_at' => new DateTime(),
                 ]);

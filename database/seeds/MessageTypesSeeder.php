@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 
-class PostsSeeder extends Seeder
+class MessageTypesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,14 +13,11 @@ class PostsSeeder extends Seeder
     public function run()
     {
         //
-        $UserID = DB::table('users')->pluck('id');
-
         $faker = Faker\Factory::create();
         {
             for($i=0; $i<2; $i++){
-                DB::table('posts')->insert([
-                    'user' => $faker->randomElement($UserID),
-                    'content'=> $faker->name,
+                DB::table('message_types')->insert([
+                    'type'=> $faker->name,
                     'created_at' => new DateTime(),
                     'updated_at' => new DateTime(),
                 ]);
